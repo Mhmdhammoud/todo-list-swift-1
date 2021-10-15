@@ -1,14 +1,21 @@
 import UIKit
 
-class TaskViewController: UIViewController {
-    @IBOutlet var label:UILabel!
-    var updateDelete:(() -> Void)?
-    var task:String?
+class TaskViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
 
+
+    
+
+    
+    @IBOutlet var tableView:UITableView!
+
+    var updateDelete:(() -> Void)?
+    var list:List?
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = task
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(showAlert))
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.title=list?.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(addTask))
 
     }
     
@@ -22,6 +29,7 @@ class TaskViewController: UIViewController {
         }))
         present(alert,animated: true)
     }
+ 
     func deleteTask(){
         guard let count = UserDefaults().value(forKey:"count")as? Int else{
             return
@@ -34,4 +42,27 @@ class TaskViewController: UIViewController {
         updateDelete?()
         navigationController?.popViewController(animated: true)
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       tableView.deselectRow(at:indexPath, animated: true)
+    //        let vc = storyboard?.instantiateViewController(withIdentifier: "task") as! TaskViewController
+    //        vc.title="Task"
+    //        vc.list = data[indexPath.row]
+    //        vc.updateDelete = {
+    //            DispatchQueue.main.async{
+    //                self.updateDelete()
+    //            }
+    //        }
+    //        navigationController?.pushViewController(vc, animated: true)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list?.tasks.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+         cell.textLabel?.text = list?.tasks[indexPath.row]
+        return cell
+    }
+
 }
+

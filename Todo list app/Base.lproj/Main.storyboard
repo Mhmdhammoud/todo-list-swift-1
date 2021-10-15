@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +42,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R12-aq-CaD">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="BZf-ba-e0H">
+                        <barButtonItem key="rightBarButtonItem" title="Add" landscapeImage="pencil.tip" catalog="system" id="BZf-ba-e0H">
+                            <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                             <connections>
                                 <action selector="didTapdd" destination="BYZ-38-t0r" id="aiU-TD-o3s"/>
                             </connections>
@@ -114,24 +116,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQY-1t-YAM">
-                                <rect key="frame" x="12" y="56" width="390" height="794"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xLh-gd-8C0">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="wEt-I7-OdP">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wEt-I7-OdP" id="O8N-5j-LVT">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QSs-cG-A4g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="QSs-cG-A4g" firstAttribute="trailing" secondItem="sQY-1t-YAM" secondAttribute="trailing" constant="12" id="DEN-Zl-myx"/>
-                            <constraint firstItem="QSs-cG-A4g" firstAttribute="bottom" secondItem="sQY-1t-YAM" secondAttribute="bottom" constant="12" id="LEw-sI-YkC"/>
-                            <constraint firstItem="sQY-1t-YAM" firstAttribute="top" secondItem="QSs-cG-A4g" secondAttribute="top" constant="12" id="dMd-cL-Uxv"/>
-                            <constraint firstItem="sQY-1t-YAM" firstAttribute="leading" secondItem="QSs-cG-A4g" secondAttribute="leading" constant="12" id="nqY-Rk-6bB"/>
+                            <constraint firstItem="QSs-cG-A4g" firstAttribute="bottom" secondItem="xLh-gd-8C0" secondAttribute="bottom" id="KZ9-pU-4Fv"/>
+                            <constraint firstItem="QSs-cG-A4g" firstAttribute="trailing" secondItem="xLh-gd-8C0" secondAttribute="trailing" id="i97-OM-gjg"/>
+                            <constraint firstItem="xLh-gd-8C0" firstAttribute="leading" secondItem="QSs-cG-A4g" secondAttribute="leading" id="oW2-4u-szc"/>
+                            <constraint firstItem="xLh-gd-8C0" firstAttribute="top" secondItem="QSs-cG-A4g" secondAttribute="top" id="pDe-fD-9wq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label" destination="sQY-1t-YAM" id="6Bl-is-S3M"/>
+                        <outlet property="tableView" destination="xLh-gd-8C0" id="nNo-1G-0Na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYy-8p-UpK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,6 +150,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="pencil.tip" catalog="system" width="99" height="128"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
